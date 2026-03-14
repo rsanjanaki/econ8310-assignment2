@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 _dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -18,12 +18,10 @@ feature_cols = [c for c in train.columns if c not in drop_cols]
 X_train = train[feature_cols]
 y_train = train['meal']
 
-model = RandomForestClassifier(
-    n_estimators=300,
+model = DecisionTreeClassifier(
     max_depth=10,
     class_weight='balanced',
-    random_state=42,
-    n_jobs=-1
+    random_state=42
 )
 modelFit = model.fit(X_train, y_train)
 
